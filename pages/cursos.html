@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Básicos - Lumin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --cor-primaria: #4361ee;
+            --cor-secundaria: #3a0ca3;
+            --cor-destaque: #4cc9f0;
+            --cor-texto: #333333;
+            --cor-texto-claro: #6c757d;
+            --cor-fundo: #f8f9fa;
+            --cor-borda: #e9ecef;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: var(--cor-primaria);
+            --cor-botao-hover: #3a56d4;
+            --cor-header: rgba(255, 255, 255, 0.95);
+            --cor-foco: rgba(76, 201, 240, 0.5);
+            --sombra: 0 4px 20px rgba(0,0,0,0.08);
+            --sombra-foco: 0 0 0 4px var(--cor-foco);
+            --borda-arredondada: 50px;
+            --transicao: all 0.3s ease;
+        }
+        
+        .tema-escuro {
+            --cor-texto: #f1f3f5;
+            --cor-texto-claro: #adb5bd;
+            --cor-fundo: #121212;
+            --cor-borda: #343a40;
+            --cor-botao-fundo: #3a56d4;
+            --cor-botao-hover: #2d45b0;
+            --cor-header: rgba(24, 24, 24, 0.95);
+            --sombra: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            transition: var(--transicao);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Header moderno com botões padronizados */
+        #header {
+            background-color: var(--cor-header);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--sombra);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transicao);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+        }
+        
+        .logo-text span {
+            color: var(--cor-destaque);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Botões padronizados */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--cor-botao-fundo);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .button:hover {
+            background-color: var(--cor-botao-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .button:focus-visible, 
+        .botao-audio:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button-outline {
+            background: transparent;
+            border: 2px solid var(--cor-primaria);
+            color: var(--cor-primaria);
+        }
+        
+        .button-outline:hover {
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+        
+        /* Botão de tema com estilo consistente */
+        .botao-tema {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--cor-texto);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .botao-tema:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-color: var(--cor-primaria);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .botao-tema:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .tema-icone {
+            font-size: 1.2rem;
+        }
+        
+        .menu-mobile {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section - Página de Cursos */
+        .curso-hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+        
+        .curso-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .curso-hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .curso-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: var(--cor-texto-claro);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .filtros-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        
+        .filtro-btn {
+            background-color: transparent;
+            border: 2px solid var(--cor-borda);
+            color: var(--cor-texto);
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+        
+        .filtro-btn:hover, .filtro-btn.active {
+            background-color: var(--cor-primaria);
+            color: white;
+            border-color: var(--cor-primaria);
+        }
+        
+        /* Seção de Cursos */
+        #cursos-lista {
+            padding: 3rem 0;
+        }
+        
+        .titulo-secao {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .titulo-secao::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 2px;
+        }
+        
+        .subtitulo-secao {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--cor-texto-claro);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .grade-cursos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .cartao-curso {
+            background-color: var(--cor-header);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .cartao-curso:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .imagem-curso-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .imagem-curso-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .cartao-curso:hover .imagem-curso-container img {
+            transform: scale(1.05);
+        }
+        
+        .dificuldade {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--cor-primaria);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tema-escuro .dificuldade {
+            background-color: rgba(24, 24, 24, 0.9);
+            color: var(--cor-destaque);
+        }
+        
+        .conteudo-curso {
+            padding: 1.75rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .conteudo-curso h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--cor-texto);
+        }
+        
+        .conteudo-curso p {
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto-claro);
+            flex-grow: 1;
+        }
+        
+        .curso-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .progresso-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progresso-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--cor-texto-claro);
+        }
+        
+        .progresso {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progresso-barra {
+            height: 100%;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .botao-curso {
+            align-self: flex-start;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cor-header);
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            border-top: 1px solid var(--cor-borda);
+            margin-top: 4rem;
+        }
+        
+        .container-footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--cor-primaria);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--cor-borda);
+            color: var(--cor-texto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicao);
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda);
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        /* Efeitos de fundo */
+        .fundo-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            background: radial-gradient(circle at top right, var(--cor-destaque), transparent 40%),
+                        radial-gradient(circle at bottom left, var(--cor-primaria), transparent 40%);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .curso-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .grade-cursos {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #header {
+                padding: 1rem;
+            }
+            
+            .menu-desktop {
+                display: none;
+            }
+            
+            .menu-mobile {
+                display: block;
+            }
+            
+            .curso-hero {
+                padding: 4rem 1rem 2rem;
+            }
+            
+            .curso-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .curso-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .titulo-secao {
+                font-size: 2rem;
+            }
+            
+            .subtitulo-secao {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .curso-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .grade-cursos {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-col {
+                text-align: center;
+            }
+            
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+        
+        /* Menu mobile */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--cor-header);
+            z-index: 2000;
+            transition: var(--transicao);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-menu-container.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transicao);
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transicao);
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Animações */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only">
+        Pular para conteúdo principal
+    </a>
+
+    <header id="header" role="banner">
+        <a href="index.html" class="logo" aria-label="Página inicial da Lumin">
+            <div class="logo-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="logo-text">Lumi<span>n</span></div>
+        </a>
+        
+        <nav class="menu-desktop" role="navigation" aria-label="Menu principal">
+            <ul>
+                <li><a href="index.html" class="nav-link">Início</a></li>
+                <li><a href="#cursos-lista" class="nav-link">Cursos</a></li>
+                <li><a href="generic.html" class="nav-link">Progresso</a></li>
+                <li><a href="elements.html" class="nav-link">Fórum</a></li>
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema()"
+                        id="botao-tema"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="login.html" class="button">Entrar</a></li>
+            </ul>
+        </nav>
+        
+        <button class="menu-mobile" aria-label="Abrir menu" onclick="abrirMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+    <div class="mobile-menu-container" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="logo-text">Lumi<span>n</span></div>
+            </div>
+            <button class="close-menu" aria-label="Fechar menu" onclick="fecharMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav>
+            <ul class="mobile-nav">
+                <li><a href="index.html" onclick="fecharMenu()">Início</a></li>
+                <li><a href="#cursos-lista" onclick="fecharMenu()">Cursos</a></li>
+                <li><a href="generic.html" onclick="fecharMenu()">Progresso</a></li>
+                <li><a href="elements.html" onclick="fecharMenu()">Fórum</a></li>
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        style="width: 100%"
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema(); fecharMenu()"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="login.html" class="button" style="text-align: center;">Entrar</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main-content" role="main">
+        <!-- Hero Section - Página de Cursos -->
+        <section class="curso-hero">
+            <div class="fundo-hero"></div>
+            <div class="curso-hero-content">
+                <h1 class="floating">Nossos Cursos</h1>
+                <p>Aprenda habilidades digitais essenciais de forma gratuita e acessível. Transforme sua relação com a tecnologia através de cursos práticos e objetivos.</p>
+                
+                <div class="filtros-container">
+                    <button class="filtro-btn active">Todos</button>
+                    <button class="filtro-btn">Iniciantes</button>
+                    <button class="filtro-btn">Intermediários</button>
+                    <button class="filtro-btn">Mais Populares</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de Cursos -->
+        <section id="cursos-lista">
+            <h2 class="titulo-secao">Cursos Disponíveis</h2>
+            <p class="subtitulo-secao">Escolha um curso para começar sua jornada de aprendizado</p>
+            
+            <div class="grade-cursos">
+                <!-- Curso 1: Como usar um navegador -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Mãos usando um laptop com navegador aberto" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Iniciante</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Como usar um navegador</h3>
+                        <p>Aprenda a pesquisar na internet de forma segura e eficiente, encontrar informações e navegar entre sites.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 6 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 12.500 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-navegador">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-navegador" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Curso 2: Como enviar um e-mail -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Tela de computador mostrando interface de e-mail" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Iniciante</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Como enviar um e-mail</h3>
+                        <p>Crie, envie e gerencie seus e-mails. Aprenda a usar anexos, organizar sua caixa de entrada e manter-se seguro.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 4 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 9.800 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-email">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-email" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+                
+                <!-- Curso 3: Redes Sociais -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Celular mostrando aplicativos de redes sociais" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Intermediário</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Redes Sociais</h3>
+                        <p>Conecte-se com segurança, compartilhe conteúdo e gerencie sua privacidade nas principais plataformas sociais.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 8 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 15.200 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-redes">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-redes" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+                
+                <!-- Curso 4: Segurança Online -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Cadeado digital representando segurança online" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Intermediário</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Segurança Online</h3>
+                        <p>Proteja seus dados e identidade digital. Aprenda a criar senhas fortes, identificar ameaças e navegar com segurança.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 5 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 8.450 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-seguranca">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-seguranca" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+                
+                <!-- Curso 5: Ferramentas de Escritório -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Documentos e laptop mostrando aplicativos de escritório" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Iniciante</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Ferramentas de Escritório</h3>
+                        <p>Domine editores de texto, planilhas e apresentações. Aprenda a criar documentos profissionais com ferramentas gratuitas.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 10 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 7.900 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-escritorio">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-escritorio" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+                
+                <!-- Curso 6: Compra Online -->
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Carrinho de compras online com produtos" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Intermediário</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Compra Online Segura</h3>
+                        <p>Aprenda a fazer compras na internet de forma segura, comparar preços, escolher produtos e proteger seus dados financeiros.</p>
+                        
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 4 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 6.300 alunos
+                            </div>
+                        </div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">
+                                <span>Seu progresso</span>
+                                <span id="progresso-compras">0%</span>
+                            </div>
+                            <div class="progresso">
+                                <div class="progresso-barra" id="barra-compras" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-col">
+                <h4>Sobre a Lumin</h4>
+                <p style="color: var(--cor-texto-claro); margin-bottom: 1.5rem;">
+                    Plataforma de inclusão digital com cursos básicos de tecnologia para todos. Aprenda no seu ritmo e transforme sua relação com a tecnologia.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Página Inicial</a></li>
+                    <li><a href="#cursos-lista"><i class="fas fa-chevron-right"></i> Cursos</a></li>
+                    <li><a href="generic.html"><i class="fas fa-chevron-right"></i> Meu Progresso</a></li>
+                    <li><a href="elements.html"><i class="fas fa-chevron-right"></i> Fórum</a></li>
+                    <li><a href="login.html"><i class="fas fa-chevron-right"></i> Entrar</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Recursos</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Ajuda</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> FAQ</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Tutoriais</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Dicas</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Blog</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contato</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Feedback</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Relatar Problema</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Acessibilidade</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Central de Ajuda</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Lumin - Plataforma de Inclusão Digital. Todos os direitos reservados.</p>
+            <div style="margin-top: 1rem;">
+                <a href="politica-privacidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Política de Privacidade</a> | 
+                <a href="termos-uso.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Termos de Uso</a> | 
+                <a href="acessibilidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Acessibilidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funções para alternar tema
+        function alternarTema() {
+            const body = document.body;
+            const temaAtual = body.classList.toggle('tema-escuro');
+            const tema = temaAtual ? 'Escuro' : 'Claro';
+            
+            localStorage.setItem('tema', tema);
+            atualizarBotaoTema(tema);
+        }
+        
+        function atualizarBotaoTema(tema) {
+            const botoesTema = document.querySelectorAll('.botao-tema');
+            botoesTema.forEach(botao => {
+                const icone = botao.querySelector('.tema-icone');
+                const texto = botao.querySelector('.tema-texto');
+                
+                if (tema === 'Escuro') {
+                    icone.textContent = '🌙';
+                    texto.textContent = 'Tema Escuro';
+                    botao.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+                } else {
+                    icone.textContent = '🌞';
+                    texto.textContent = 'Tema Claro';
+                    botao.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+                }
+            });
+        }
+        
+        // Menu mobile
+        function abrirMenu() {
+            document.getElementById('mobile-menu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function fecharMenu() {
+            document.getElementById('mobile-menu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o tema
+            const temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo === 'Escuro') {
+                document.body.classList.add('tema-escuro');
+                atualizarBotaoTema('Escuro');
+            } else {
+                atualizarBotaoTema('Claro');
+            }
+            
+            // Filtros de cursos
+            const filtros = document.querySelectorAll('.filtro-btn');
+            filtros.forEach(filtro => {
+                filtro.addEventListener('click', function() {
+                    filtros.forEach(f => f.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Carregar progresso dos cursos
+            const cursos = [
+                'navegador', 'email', 'redes', 
+                'seguranca', 'escritorio', 'compras'
+            ];
+            
+            cursos.forEach(curso => {
+                const progresso = parseInt(localStorage.getItem(`luminProgress-${curso}`)) || 0;
+                document.getElementById(`barra-${curso}`).style.width = `${progresso}%`;
+                document.getElementById(`progresso-${curso}`).textContent = `${progresso}%`;
+            });
+            
+            // Botões de progresso
+            document.querySelectorAll('.botao-curso').forEach(botao => {
+                botao.addEventListener('click', function() {
+                    alert('Você será redirecionado para o curso selecionado');
+                });
+            });
+            
+            // Sistema de áudio
+            document.getElementById('ajudaAudio').addEventListener('click', () => {
+                const texto = "Clique no botão 'Concluir etapa' após realizar cada passo do curso.";
+                if ('speechSynthesis' in window) {
+                    const voz = new SpeechSynthesisUtterance(texto);
+                    window.speechSynthesis.speak(voz);
+                } else {
+                    alert(texto);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Plataforma de inclusão digital com cursos básicos de tecnologia">
+    <title>Lumin - Plataforma de Inclusão Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --cor-primaria: #4361ee;
+            --cor-secundaria: #3a0ca3;
+            --cor-destaque: #4cc9f0;
+            --cor-texto: #333333;
+            --cor-texto-claro: #6c757d;
+            --cor-fundo: #f8f9fa;
+            --cor-borda: #e9ecef;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: var(--cor-primaria);
+            --cor-botao-hover: #3a56d4;
+            --cor-header: rgba(255, 255, 255, 0.95);
+            --cor-foco: rgba(76, 201, 240, 0.5);
+            --sombra: 0 4px 20px rgba(0,0,0,0.08);
+            --sombra-foco: 0 0 0 4px var(--cor-foco);
+            --borda-arredondada: 50px;
+            --transicao: all 0.3s ease;
+        }
+        
+        .tema-escuro {
+            --cor-texto: #f1f3f5;
+            --cor-texto-claro: #adb5bd;
+            --cor-fundo: #121212;
+            --cor-borda: #343a40;
+            --cor-botao-fundo: #3a56d4;
+            --cor-botao-hover: #2d45b0;
+            --cor-header: rgba(24, 24, 24, 0.95);
+            --sombra: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            transition: var(--transicao);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .sr-only, .sr-only-focusable:not(:focus) {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Header moderno com botões padronizados */
+        #header {
+            background-color: var(--cor-header);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--sombra);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transicao);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+        }
+        
+        .logo-text span {
+            color: var(--cor-destaque);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Botões padronizados */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--cor-botao-fundo);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .button:hover {
+            background-color: var(--cor-botao-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .button:focus-visible, 
+        .botao-audio:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button-outline {
+            background: transparent;
+            border: 2px solid var(--cor-primaria);
+            color: var(--cor-primaria);
+        }
+        
+        .button-outline:hover {
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+        
+        /* Botão de tema com estilo consistente */
+        .botao-tema {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--cor-texto);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .botao-tema:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-color: var(--cor-primaria);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .botao-tema:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .tema-icone {
+            font-size: 1.2rem;
+        }
+        
+        .menu-mobile {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section - Ajustes para alinhamento das estatísticas */
+        #hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 6rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        #titulo-hero {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-texto {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: var(--cor-texto-claro);
+        }
+        
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        /* Container para as estatísticas */
+        .hero-stats-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .tema-escuro .hero-stats {
+            background: rgba(24, 24, 24, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--cor-primaria);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: var(--cor-texto-claro);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* Seção de Recursos */
+        #recursos {
+            padding: 5rem 0;
+        }
+        
+        .titulo-secao {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .titulo-secao::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 2px;
+        }
+        
+        .subtitulo-secao {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--cor-texto-claro);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+        
+        .grade-recursos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .cartao-recurso {
+            background-color: var(--cor-header);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .cartao-recurso:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .recurso-icone {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .cartao-recurso h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--cor-texto);
+        }
+        
+        .cartao-recurso p {
+            color: var(--cor-texto-claro);
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Seção de Cursos */
+        #cursos {
+            padding: 5rem 0;
+            background: linear-gradient(to bottom, var(--cor-fundo), rgba(248, 249, 250, 0.5));
+        }
+        
+        .tema-escuro #cursos {
+            background: linear-gradient(to bottom, var(--cor-fundo), rgba(24, 24, 24, 0.5));
+        }
+        
+        .grade-cursos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .cartao-curso {
+            background-color: var(--cor-header);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .cartao-curso:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .imagem-curso-container {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .imagem-curso-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .cartao-curso:hover .imagem-curso-container img {
+            transform: scale(1.1);
+        }
+        
+        .dificuldade {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--cor-primaria);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .tema-escuro .dificuldade {
+            background-color: rgba(24, 24, 24, 0.9);
+            color: var(--cor-destaque);
+        }
+        
+        .conteudo-curso {
+            padding: 1.75rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .conteudo-curso h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--cor-texto);
+        }
+        
+        .conteudo-curso p {
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto-claro);
+            flex-grow: 1;
+        }
+        
+        .curso-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .botao-curso {
+            align-self: flex-start;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cor-header);
+            padding: 4rem 2rem 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            border-top: 1px solid var(--cor-borda);
+        }
+        
+        .container-footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--cor-primaria);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--cor-borda);
+            color: var(--cor-texto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicao);
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--cor-borda);
+            border-radius: 50px;
+            background-color: transparent;
+            color: var(--cor-texto);
+            transition: var(--transicao);
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px var(--cor-foco);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda);
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        /* Efeitos de fundo */
+        .fundo-hero {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.1;
+            background: radial-gradient(circle at top right, var(--cor-destaque), transparent 40%),
+                        radial-gradient(circle at bottom left, var(--cor-primaria), transparent 40%);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            #titulo-hero {
+                font-size: 2.8rem;
+            }
+            
+            .grade-cursos {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #header {
+                padding: 1rem;
+            }
+            
+            .menu-desktop {
+                display: none;
+            }
+            
+            .menu-mobile {
+                display: block;
+            }
+            
+            #hero {
+                padding: 5rem 1rem 3rem;
+            }
+            
+            #titulo-hero {
+                font-size: 2.3rem;
+            }
+            
+            .hero-texto {
+                font-size: 1.1rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            
+            .stat-item {
+                min-width: auto;
+            }
+            
+            .titulo-secao {
+                font-size: 2rem;
+            }
+            
+            .subtitulo-secao {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #titulo-hero {
+                font-size: 2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .grade-cursos, .grade-recursos {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-col {
+                text-align: center;
+            }
+            
+            .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+        
+        /* Menu mobile */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--cor-header);
+            z-index: 2000;
+            transition: var(--transicao);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-menu-container.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transicao);
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transicao);
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Animações */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">
+        Pular para conteúdo principal
+    </a>
+
+    <header id="header" role="banner">
+        <a href="index.html" class="logo" aria-label="Página inicial da Lumin">
+            <div class="logo-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="logo-text">Lumi<span>n</span></div>
+        </a>
+        
+        <nav class="menu-desktop" role="navigation" aria-label="Menu principal">
+            <ul>
+                <li><a href="#recursos" class="nav-link">Recursos</a></li>
+                <li><a href="#cursos" class="nav-link">Cursos</a></li>
+                <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+                <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema()"
+                        id="botao-tema"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="login.html" class="button">Entrar</a></li>
+            </ul>
+        </nav>
+        
+        <button class="menu-mobile" aria-label="Abrir menu" onclick="abrirMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+    <div class="mobile-menu-container" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="logo-text">Lumi<span>n</span></div>
+            </div>
+            <button class="close-menu" aria-label="Fechar menu" onclick="fecharMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav>
+            <ul class="mobile-nav">
+                <li><a href="#recursos" onclick="fecharMenu()">Recursos</a></li>
+                <li><a href="#cursos" onclick="fecharMenu()">Cursos</a></li>
+                <li><a href="#depoimentos" onclick="fecharMenu()">Depoimentos</a></li>
+                <li><a href="#sobre" onclick="fecharMenu()">Sobre</a></li>
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        style="width: 100%"
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema(); fecharMenu()"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="login.html" class="button" style="text-align: center;">Entrar</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main-content" role="main">
+        <!-- Hero Section com estatísticas alinhadas -->
+        <section id="hero">
+            <div class="fundo-hero"></div>
+            <div class="hero-content">
+                <h1 id="titulo-hero" class="floating">Inclusão Digital para Todos</h1>
+                <p class="hero-texto">Aprenda habilidades digitais essenciais de forma gratuita e acessível. Nossa plataforma oferece cursos básicos de tecnologia para transformar sua relação com o mundo digital.</p>
+                
+                <div class="hero-cta">
+                    <a href="#cursos" class="button">
+                        <i class="fas fa-play-circle"></i> Comece Agora
+                    </a>
+                    <a href="#recursos" class="button button-outline">
+                        <i class="fas fa-info-circle"></i> Saiba Mais
+                    </a>
+                </div>
+                
+                <!-- Container para as estatísticas -->
+                <div class="hero-stats-container">
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">10k+</span>
+                            <span class="stat-label">Alunos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Cursos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98%</span>
+                            <span class="stat-label">Satisfação</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos -->
+        <section id="recursos">
+            <h2 class="titulo-secao">Por que escolher a Lumin?</h2>
+            <p class="subtitulo-secao">Nossa plataforma oferece tudo que você precisa para dominar as habilidades digitais essenciais no mundo atual.</p>
+            
+            <div class="grade-recursos">
+                <div class="cartao-recurso floating">
+                    <div class="recurso-icone">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Cursos Gratuitos</h3>
+                    <p>Acesso ilimitado a todos os cursos sem qualquer custo. Educação digital de qualidade para todos.</p>
+                    <a href="#cursos" class="button button-outline">Explorar Cursos</a>
+                </div>
+                
+                <div class="cartao-recurso floating delay-1">
+                    <div class="recurso-icone">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Comunidade Ativa</h3>
+                    <p>Conecte-se com outros alunos, faça perguntas e compartilhe conhecimento em nossa comunidade.</p>
+                    <a href="#comunidade" class="button button-outline">Participar</a>
+                </div>
+                
+                <div class="cartao-recurso floating delay-2">
+                    <div class="recurso-icone">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Acesso Multiplataforma</h3>
+                    <p>Aprenda em qualquer dispositivo - computador, tablet ou smartphone. Seu progresso sincronizado.</p>
+                    <a href="#app" class="button button-outline">Baixar App</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cursos -->
+        <section id="cursos">
+            <h2 class="titulo-secao">Cursos Populares</h2>
+            <p class="subtitulo-secao">Comece sua jornada digital com nossos cursos mais populares</p>
+            
+            <div class="grade-cursos">
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Mãos usando um laptop com navegador aberto" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Iniciante</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Como usar um navegador</h3>
+                        <p>Aprenda a pesquisar na internet de forma segura e eficiente, encontrar informações e navegar entre sites.</p>
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 6 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 12.500 alunos
+                            </div>
+                        </div>
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1511882150382-421056c89033?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Tela de computador mostrando interface de e-mail" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Iniciante</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Como enviar um e-mail</h3>
+                        <p>Crie, envie e gerencie seus e-mails. Aprenda a usar anexos, organizar sua caixa de entrada e manter-se seguro.</p>
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 4 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 9.800 alunos
+                            </div>
+                        </div>
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+                
+                <article class="cartao-curso">
+                    <div class="imagem-curso-container">
+                        <img 
+                            src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                            alt="Celular mostrando aplicativos de redes sociais" 
+                            loading="lazy"
+                        >
+                        <span class="dificuldade">Intermediário</span>
+                    </div>
+                    <div class="conteudo-curso">
+                        <h3>Redes Sociais</h3>
+                        <p>Conecte-se com segurança, compartilhe conteúdo e gerencie sua privacidade nas principais plataformas sociais.</p>
+                        <div class="curso-info">
+                            <div class="info-item">
+                                <i class="far fa-clock"></i> 8 horas
+                            </div>
+                            <div class="info-item">
+                                <i class="far fa-user"></i> 15.200 alunos
+                            </div>
+                        </div>
+                        <button class="button botao-curso">
+                            <i class="fas fa-play-circle"></i> Começar Curso
+                        </button>
+                    </div>
+                </article>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="cursos.html" class="button">
+                    <i class="fas fa-book-open"></i> Ver Todos os Cursos
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-col">
+                <h4>Sobre a Lumin</h4>
+                <p style="color: var(--cor-texto-claro); margin-bottom: 1.5rem;">
+                    Plataforma de inclusão digital com cursos básicos de tecnologia para todos. Aprenda no seu ritmo e transforme sua relação com a tecnologia.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Página Inicial</a></li>
+                    <li><a href="#recursos"><i class="fas fa-chevron-right"></i> Recursos</a></li>
+                    <li><a href="#cursos"><i class="fas fa-chevron-right"></i> Cursos</a></li>
+                    <li><a href="#depoimentos"><i class="fas fa-chevron-right"></i> Depoimentos</a></li>
+                    <li><a href="#sobre"><i class="fas fa-chevron-right"></i> Sobre Nós</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Cursos Populares</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Navegação na Internet</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Uso de E-mail</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Redes Sociais</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Segurança Online</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Ferramentas de Escritório</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="color: var(--cor-texto-claro); margin-bottom: 1.5rem;">
+                    Inscreva-se para receber novidades e atualizações de cursos.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" required>
+                    <button type="submit" class="button" style="padding: 0.75rem 1.5rem;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Lumin - Plataforma de Inclusão Digital. Todos os direitos reservados.</p>
+            <div style="margin-top: 1rem;">
+                <a href="politica-privacidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Política de Privacidade</a> | 
+                <a href="termos-uso.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Termos de Uso</a> | 
+                <a href="acessibilidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Acessibilidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funções para alternar tema
+        function alternarTema() {
+            const body = document.body;
+            const temaAtual = body.classList.toggle('tema-escuro');
+            const tema = temaAtual ? 'Escuro' : 'Claro';
+            
+            localStorage.setItem('tema', tema);
+            atualizarBotaoTema(tema);
+            
+            // Anunciar mudança de tema para leitores de tela
+            document.getElementById('a11y-status').textContent = `Tema alterado para ${tema}`;
+            setTimeout(() => {
+                document.getElementById('a11y-status').textContent = '';
+            }, 2000);
+        }
+        
+        function atualizarBotaoTema(tema) {
+            const botoesTema = document.querySelectorAll('.botao-tema');
+            botoesTema.forEach(botao => {
+                const icone = botao.querySelector('.tema-icone');
+                const texto = botao.querySelector('.tema-texto');
+                
+                if (tema === 'Escuro') {
+                    icone.textContent = '🌙';
+                    texto.textContent = 'Tema Escuro';
+                    botao.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+                } else {
+                    icone.textContent = '🌞';
+                    texto.textContent = 'Tema Claro';
+                    botao.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+                }
+            });
+        }
+        
+        // Menu mobile
+        function abrirMenu() {
+            document.getElementById('mobile-menu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function fecharMenu() {
+            document.getElementById('mobile-menu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o tema
+            const temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo === 'Escuro') {
+                document.body.classList.add('tema-escuro');
+                atualizarBotaoTema('Escuro');
+            } else {
+                atualizarBotaoTema('Claro');
+            }
+            
+            // Efeito de scroll suave
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Animação ao rolar
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.cartao-recurso, .cartao-curso').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+    <div aria-live="polite" class="sr-only" id="a11y-status"></div>
+</body>
+</html>

@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórum de Ajuda - Lumin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-primaria: #3a5f8d;
+            --cor-secundaria: #0d4a6e;
+            --cor-terciaria: #4d7bb6;
+            --cor-texto: #333333;
+            --cor-texto-claro: #5a6d86;
+            --cor-fundo: #f8fafc;
+            --cor-borda: #e2e8f0;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: var(--cor-primaria);
+            --cor-botao-hover: var(--cor-secundaria);
+            --cor-header: #ffffff;
+            --cor-foco: #ffbf00;
+            --sombra: 0 4px 12px rgba(0,0,0,0.05);
+            --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --sombra-card-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --cor-sucesso: #28a745;
+            --cor-alerta: #ffc107;
+            --cor-info: #17a2b8;
+            --cor-apoio: #6f42c1;
+            --cor-destaque: #eef5ff;
+            --gradiente-primario: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            --transicao: all 0.3s ease;
+            --raio-borda: 12px;
+            --espacamento: 1.5rem;
+        }
+        
+        .tema-escuro {
+            --cor-texto: #e0e0e0;
+            --cor-texto-claro: #a0aec0;
+            --cor-fundo: #121826;
+            --cor-borda: #2d3748;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: #2c3e50;
+            --cor-botao-hover: #1a2a38;
+            --cor-header: #1a202c;
+            --cor-destaque: #1e293b;
+            --sombra: 0 4px 12px rgba(0,0,0,0.15);
+            --sombra-card: 0 5px 15px rgba(0, 0, 0, 0.15);
+            --sombra-card-hover: 0 8px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            font-size: 1.05rem;
+            overflow-x: hidden;
+            padding-bottom: 3rem;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--cor-primaria);
+            font-weight: 600;
+        }
+        
+        p {
+            color: var(--cor-texto-claro);
+            margin-bottom: 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Header */
+        #header {
+            background-color: var(--cor-header);
+            box-shadow: var(--sombra);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transicao);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            background: var(--gradiente-primario);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .logo-texto {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: var(--gradiente-primario);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+        }
+        
+        .button, .botao-tema {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradiente-primario);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.4rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .button::after, .botao-tema::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: var(--transicao);
+            opacity: 0;
+        }
+        
+        .button:hover::after, .botao-tema:hover::after {
+            opacity: 1;
+            top: -30%;
+            left: -30%;
+        }
+        
+        .button:hover, .botao-tema:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            opacity: 0.95;
+        }
+        
+        .button:focus-visible, 
+        .botao-tema:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--cor-foco);
+        }
+        
+        .botao-tema {
+            gap: 0.5rem;
+        }
+        
+        .tema-icone {
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        main {
+            padding-top: 2rem;
+        }
+        
+        .cabecalho {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+        
+        .cabecalho h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.2rem;
+            background: var(--gradiente-primario);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .cabecalho p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        .alerta {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid var(--cor-alerta);
+            padding: 1.5rem;
+            border-radius: 0 var(--raio-borda) var(--raio-borda) 0;
+            margin: 2.5rem 0;
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .alerta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--cor-alerta);
+        }
+        
+        .alerta i {
+            color: var(--cor-alerta);
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .alerta-conteudo {
+            flex-grow: 1;
+        }
+        
+        .alerta-conteudo p {
+            margin-bottom: 0.5rem;
+            color: var(--cor-texto);
+        }
+        
+        .alerta-conteudo p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Tópicos do Fórum */
+        .topicos-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3rem;
+        }
+        
+        .topico-card {
+            background-color: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 1.8rem;
+            transition: var(--transicao);
+            border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .topico-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-card-hover);
+            border-color: var(--cor-primaria);
+        }
+        
+        .topico-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .topico-icone {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(58, 95, 141, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+            flex-shrink: 0;
+            transition: var(--transicao);
+        }
+        
+        .topico-info {
+            flex-grow: 1;
+        }
+        
+        .topico-titulo {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+            color: var(--cor-primaria);
+        }
+        
+        .topico-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.95rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        .topico-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cor-texto-claro);
+            white-space: nowrap;
+        }
+        
+        .topico-conteudo {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+        
+        .topico-conteudo p {
+            line-height: 1.7;
+        }
+        
+        .moderado {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--cor-sucesso);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            width: fit-content;
+        }
+        
+        /* Formulário */
+        .formulario-container {
+            background-color: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .formulario-titulo {
+            font-size: 1.7rem;
+            margin-bottom: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--cor-primaria);
+        }
+        
+        .formulario-titulo i {
+            color: var(--cor-apoio);
+            background: rgba(111, 66, 193, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--cor-texto);
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transicao);
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+        }
+        
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px rgba(58, 95, 141, 0.15);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .campo-obrigatorio {
+            color: #dc3545;
+            margin-left: 4px;
+        }
+        
+        .botoes-audio {
+            display: flex;
+            gap: 1.2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .botao-audio {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(58, 95, 141, 0.08);
+            color: var(--cor-primaria);
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 1rem 1.6rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transicao);
+            flex: 1;
+            min-width: 250px;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .botao-audio::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: var(--transicao);
+            opacity: 0;
+        }
+        
+        .botao-audio:hover::after {
+            opacity: 1;
+            top: -30%;
+            left: -30%;
+        }
+        
+        .botao-audio:hover {
+            background: rgba(58, 95, 141, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .botao-enviar {
+            background: var(--gradiente-primario);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: 8px;
+            padding: 1.1rem 2.2rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transicao);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            box-shadow: var(--sombra);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .botao-enviar::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(30deg);
+            transition: var(--transicao);
+            opacity: 0;
+        }
+        
+        .botao-enviar:hover::after {
+            opacity: 1;
+            top: -30%;
+            left: -30%;
+        }
+        
+        .botao-enviar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            opacity: 0.95;
+        }
+        
+        .aviso-moderacao {
+            background: rgba(23, 162, 184, 0.08);
+            padding: 1.2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--cor-info);
+            position: relative;
+        }
+        
+        .aviso-moderacao::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--cor-info);
+        }
+        
+        .aviso-moderacao i {
+            color: var(--cor-info);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            background-color: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .faq-titulo {
+            font-size: 1.7rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--cor-primaria);
+        }
+        
+        .faq-titulo i {
+            color: var(--cor-info);
+            background: rgba(23, 162, 184, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 1.5rem 0;
+            transition: var(--transicao);
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-pergunta {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: var(--transicao);
+            padding: 0.5rem;
+            border-radius: 8px;
+            color: var(--cor-texto);
+            position: relative;
+        }
+        
+        .faq-pergunta:hover {
+            background-color: var(--cor-destaque);
+        }
+        
+        .faq-pergunta i {
+            color: var(--cor-primaria);
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .faq-resposta {
+            padding: 0 0 0 2.8rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        
+        .faq-resposta.expandida {
+            max-height: 500px;
+            padding: 1rem 0 0 2.8rem;
+        }
+        
+        .faq-resposta p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+        
+        .faq-resposta ol {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .faq-resposta li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+            color: var(--cor-texto);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cor-header);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--cor-borda);
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .footer-conteudo {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-titulo {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-primaria);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-titulo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradiente-primario);
+            border-radius: 3px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transicao);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+        
+        footer a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: var(--gradiente-primario);
+            transition: var(--transicao);
+        }
+        
+        footer a:hover {
+            color: var(--cor-primaria);
+        }
+        
+        footer a:hover::after {
+            width: 100%;
+        }
+        
+        .footer-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--cor-texto-claro);
+        }
+        
+        .footer-info-item i {
+            color: var(--cor-primaria);
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--cor-borda);
+            width: 100%;
+            color: var(--cor-texto-claro);
+        }
+        
+        .info-acessibilidade {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 1rem;
+            color: var(--cor-texto-claro);
+            line-height: 1.7;
+        }
+        
+        /* Botão Voltar ao Topo */
+        .voltar-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradiente-primario);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            z-index: 999;
+            border: none;
+        }
+        
+        .voltar-topo.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .voltar-topo:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .topicos-container {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            }
+            
+            .footer-conteudo {
+                gap: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .cabecalho h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cabecalho p {
+                font-size: 1.1rem;
+            }
+            
+            .topico-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .moderado {
+                position: static;
+                margin-top: 1rem;
+            }
+            
+            .formulario-container,
+            .faq-container {
+                padding: 1.8rem;
+            }
+            
+            .botoes-audio {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .botao-audio {
+                min-width: 100%;
+            }
+            
+            .footer-conteudo {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .botao-tema {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cabecalho h1 {
+                font-size: 1.9rem;
+                gap: 1rem;
+            }
+            
+            .cabecalho p {
+                font-size: 1rem;
+            }
+            
+            .alerta {
+                flex-direction: column;
+                text-align: center;
+                padding: 1.2rem;
+            }
+            
+            .alerta i {
+                margin-bottom: 0.5rem;
+            }
+            
+            .topicos-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .formulario-titulo,
+            .faq-titulo {
+                font-size: 1.5rem;
+            }
+            
+            .footer-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .voltar-topo {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        /* Animação de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animar {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .atraso-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .atraso-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .atraso-3 {
+            animation-delay: 0.3s;
+        }
+        
+        /* Efeito de onda nos botões */
+        .onda {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transform: scale(0);
+            pointer-events: none;
+            animation: onda-anim 0.6s linear;
+        }
+        
+        @keyframes onda-anim {
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only">
+        Pular para conteúdo principal
+    </a>
+
+    <header id="header" role="banner">
+        <div class="header-container">
+            <a href="index.html" class="logo" aria-label="Página inicial da Lumin">
+                <div class="logo-img">L</div>
+                <span class="logo-texto">Lumin</span>
+            </a>
+            <nav role="navigation" aria-label="Menu principal">
+                <ul>
+                    <li><a href="cursos.html" class="button"><i class="fas fa-book"></i> Cursos</a></li>
+                    <li><a href="generic.html" class="button"><i class="fas fa-chart-line"></i> Progresso</a></li>
+                    <li>
+                        <button 
+                            class="button botao-tema" 
+                            aria-label="Alternar tema entre claro e escuro"
+                            onclick="alternarTema()"
+                            id="botao-tema"
+                        >
+                            <span class="tema-icone">🌞</span>
+                            <span class="tema-texto">Tema Claro</span>
+                        </button>
+                    </li>
+                    <li><a href="cursos.html" class="button"><i class="fas fa-graduation-cap"></i> Ver Todos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <div class="container">
+            <div class="cabecalho animar">
+                <h1><i class="fas fa-comments"></i> Fórum de Ajuda</h1>
+                <p>Pergunte ou ajude outros usuários da comunidade Lumin. Compartilhe conhecimento e aprenda juntos!</p>
+            </div>
+
+            <div class="alerta animar atraso-1">
+                <i class="fas fa-exclamation-circle"></i>
+                <div class="alerta-conteudo">
+                    <p><strong>Atenção:</strong> Todas as perguntas são moderadas por voluntários para garantir a qualidade das respostas.</p>
+                    <p>Respostas são normalmente fornecidas em até 24 horas.</p>
+                </div>
+            </div>
+
+            <div class="topicos-container">
+                <!-- Tópico 1 -->
+                <div class="topico-card animar atraso-1" role="listitem" aria-labelledby="topico1-titulo">
+                    <div class="topico-header">
+                        <div class="topico-icone">
+                            <i class="fas fa-paperclip"></i>
+                        </div>
+                        <div class="topico-info">
+                            <h3 class="topico-titulo" id="topico1-titulo">Como anexar arquivos no e-mail?</h3>
+                            <div class="topico-stats">
+                                <span><i class="fas fa-user"></i> Maria S.</span>
+                                <span><i class="fas fa-comment"></i> 5 respostas</span>
+                                <span><i class="fas fa-clock"></i> 2 horas atrás</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topico-conteudo">
+                        <p>Estou tentando anexar um documento no meu e-mail, mas não consigo encontrar o botão. Alguém pode me ajudar?</p>
+                    </div>
+                    <div class="moderado">
+                        <i class="fas fa-check-circle"></i> Verificado por voluntários
+                    </div>
+                </div>
+
+                <!-- Tópico 2 -->
+                <div class="topico-card animar atraso-2" role="listitem" aria-labelledby="topico2-titulo">
+                    <div class="topico-header">
+                        <div class="topico-icone">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="topico-info">
+                            <h3 class="topico-titulo" id="topico2-titulo">Como criar uma senha segura?</h3>
+                            <div class="topico-stats">
+                                <span><i class="fas fa-user"></i> Carlos A.</span>
+                                <span><i class="fas fa-comment"></i> 12 respostas</span>
+                                <span><i class="fas fa-clock"></i> 1 dia atrás</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topico-conteudo">
+                        <p>Preciso criar uma nova conta e quero saber como fazer uma senha que não seja fácil de adivinhar. Alguma dica?</p>
+                    </div>
+                    <div class="moderado">
+                        <i class="fas fa-check-circle"></i> Verificado por voluntários
+                    </div>
+                </div>
+
+                <!-- Tópico 3 -->
+                <div class="topico-card animar atraso-3" role="listitem" aria-labelledby="topico3-titulo">
+                    <div class="topico-header">
+                        <div class="topico-icone">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="topico-info">
+                            <h3 class="topico-titulo" id="topico3-titulo">Como fazer chamada de vídeo pelo WhatsApp?</h3>
+                            <div class="topico-stats">
+                                <span><i class="fas fa-user"></i> João P.</span>
+                                <span><i class="fas fa-comment"></i> 7 respostas</span>
+                                <span><i class="fas fa-clock"></i> 3 dias atrás</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="topico-conteudo">
+                        <p>Quero falar com minha neta por vídeo no celular. Como faço isso? Ela disse que usa o WhatsApp.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="formulario-container animar atraso-2">
+                <h2 class="formulario-titulo"><i class="fas fa-plus-circle"></i> Faça uma nova pergunta</h2>
+                
+                <form method="post" action="#">
+                    <div class="form-group">
+                        <label for="titulo">Título da pergunta <span class="campo-obrigatorio">*</span></label>
+                        <input type="text" id="titulo" name="titulo" placeholder="Exemplo: Como enviar uma foto por e-mail?" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="pergunta">Descreva sua dúvida</label>
+                        <textarea id="pergunta" name="pergunta" rows="5" placeholder="Descreva sua dúvida com detalhes para que possamos ajudar melhor"></textarea>
+                    </div>
+                    
+                    <div class="botoes-audio">
+                        <button type="button" class="botao-audio" id="gravarAudio" aria-label="Gravar áudio da pergunta">
+                            <i class="fas fa-microphone"></i> Gravar Pergunta por Áudio
+                        </button>
+                        
+                        <button type="button" class="botao-audio" id="ajudaAudio" aria-label="Ouvir instruções do fórum">
+                            <i class="fas fa-volume-up"></i> Ouvir Instruções
+                        </button>
+                    </div>
+                    
+                    <div class="aviso-moderacao">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <p><strong>Sua pergunta será respondida em até 24 horas</strong></p>
+                            <p>Todas as perguntas passam por moderação antes de serem publicadas</p>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="botao-enviar">
+                        <i class="fas fa-paper-plane"></i> Enviar Pergunta
+                    </button>
+                </form>
+            </div>
+
+            <div class="faq-container animar atraso-3">
+                <h2 class="faq-titulo"><i class="fas fa-question-circle"></i> Perguntas Frequentes (FAQ)</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-pergunta" onclick="alternarFAQ(this)" aria-expanded="false" role="button">
+                        <i class="fas fa-chevron-right"></i>
+                        Como abrir uma nova aba no navegador?
+                    </div>
+                    <div class="faq-resposta">
+                        <p>Para abrir uma nova aba no navegador:</p>
+                        <ol>
+                            <li>Localize o botão "+" ao lado das abas abertas</li>
+                            <li>Clique neste botão</li>
+                            <li>Você também pode usar o atalho de teclado: Ctrl+T (Windows) ou Command+T (Mac)</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-pergunta" onclick="alternarFAQ(this)" aria-expanded="false" role="button">
+                        <i class="fas fa-chevron-right"></i>
+                        Onde coloco o endereço do e-mail quando estou enviando uma mensagem?
+                    </div>
+                    <div class="faq-resposta">
+                        <p>Quando estiver escrevendo um novo e-mail:</p>
+                        <ol>
+                            <li>Procure o campo chamado "Para"</li>
+                            <li>Digite o endereço completo da pessoa (exemplo: pessoa@provedor.com)</li>
+                            <li>Certifique-se de digitar corretamente, incluindo o "@" e o domínio (.com, .com.br, etc)</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-pergunta" onclick="alternarFAQ(this)" aria-expanded="false" role="button">
+                        <i class="fas fa-chevron-right"></i>
+                        Como salvar uma foto que recebi por mensagem?
+                    </div>
+                    <div class="faq-resposta">
+                        <p>Para salvar uma foto recebida:</p>
+                        <ol>
+                            <li>Toque na foto para abri-la em tela cheia</li>
+                            <li>Procure o ícone de download (geralmente uma seta para baixo)</li>
+                            <li>Toque neste ícone para salvar a foto no seu dispositivo</li>
+                            <li>As fotos salvas geralmente ficam na pasta "Downloads" ou "Imagens"</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-conteudo">
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Página Inicial</a></li>
+                        <li><a href="cursos.html"><i class="fas fa-book"></i> Cursos</a></li>
+                        <li><a href="forum.html"><i class="fas fa-comments"></i> Fórum</a></li>
+                        <li><a href="progresso.html"><i class="fas fa-chart-line"></i> Progresso</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        <li><a href="tutoriais.html"><i class="fas fa-video"></i> Tutoriais</a></li>
+                        <li><a href="comunidade.html"><i class="fas fa-users"></i> Comunidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="politica-privacidade.html"><i class="fas fa-shield-alt"></i> Privacidade</a></li>
+                        <li><a href="termos-uso.html"><i class="fas fa-file-contract"></i> Termos de Uso</a></li>
+                        <li><a href="acessibilidade.html"><i class="fas fa-universal-access"></i> Acessibilidade</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-info">
+                <div class="footer-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contato@lumin.org.br</span>
+                </div>
+                <div class="footer-info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(11) 9999-9999</span>
+                </div>
+                <div class="footer-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>São Paulo, Brasil</span>
+                </div>
+            </div>
+            
+            <p class="copyright">&copy; 2025 Lumin - Inclusão Digital. Todos os direitos reservados.</p>
+            
+            <p class="info-acessibilidade">
+                Este site segue as diretrizes de acessibilidade WCAG 2.1. Se encontrar qualquer problema de acessibilidade, por favor
+                <a href="contato.html">entre em contato</a>.
+            </p>
+        </div>
+    </footer>
+    
+    <button class="voltar-topo" aria-label="Voltar ao topo da página" onclick="voltarAoTopo()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Alternar tema
+        function alternarTema() {
+            const body = document.body;
+            const botaoTema = document.getElementById('botao-tema');
+            const icone = botaoTema.querySelector('.tema-icone');
+            const texto = botaoTema.querySelector('.tema-texto');
+            
+            body.classList.toggle('tema-escuro');
+            
+            if (body.classList.contains('tema-escuro')) {
+                icone.textContent = '🌙';
+                texto.textContent = 'Tema Escuro';
+                botaoTema.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+                localStorage.setItem('tema', 'Escuro');
+            } else {
+                icone.textContent = '🌞';
+                texto.textContent = 'Tema Claro';
+                botaoTema.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+                localStorage.setItem('tema', 'Claro');
+            }
+        }
+
+        // Inicialização do tema
+        document.addEventListener('DOMContentLoaded', () => {
+            const temaSalvo = localStorage.getItem('tema');
+            const botaoTema = document.getElementById('botao-tema');
+            const icone = botaoTema.querySelector('.tema-icone');
+            const texto = botaoTema.querySelector('.tema-texto');
+            
+            if (temaSalvo === 'Escuro') {
+                document.body.classList.add('tema-escuro');
+                icone.textContent = '🌙';
+                texto.textContent = 'Tema Escuro';
+                botaoTema.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+            } else {
+                icone.textContent = '🌞';
+                texto.textContent = 'Tema Claro';
+                botaoTema.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+            }
+            
+            // Configurar FAQ
+            document.querySelectorAll('.faq-pergunta').forEach(pergunta => {
+                const resposta = pergunta.nextElementSibling;
+                const icone = pergunta.querySelector('i');
+                
+                if (resposta.scrollHeight > 0) {
+                    resposta.style.maxHeight = '0';
+                    icone.classList.remove('fa-chevron-down');
+                    icone.classList.add('fa-chevron-right');
+                    pergunta.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Configurar botão voltar ao topo
+            window.addEventListener('scroll', () => {
+                const botaoTopo = document.querySelector('.voltar-topo');
+                if (window.scrollY > 500) {
+                    botaoTopo.classList.add('visivel');
+                } else {
+                    botaoTopo.classList.remove('visivel');
+                }
+            });
+            
+            // Efeito de onda nos botões
+            document.querySelectorAll('.button, .botao-audio, .botao-enviar').forEach(botao => {
+                botao.addEventListener('click', function(e) {
+                    const onda = document.createElement('span');
+                    onda.classList.add('onda');
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    onda.style.left = `${x}px`;
+                    onda.style.top = `${y}px`;
+                    
+                    this.appendChild(onda);
+                    
+                    setTimeout(() => {
+                        onda.remove();
+                    }, 600);
+                });
+            });
+        });
+
+        // Alternar FAQ
+        function alternarFAQ(elemento) {
+            const resposta = elemento.nextElementSibling;
+            const icone = elemento.querySelector('i');
+            
+            // Fechar todos os outros FAQs
+            document.querySelectorAll('.faq-resposta').forEach(r => {
+                if (r !== resposta && r.classList.contains('expandida')) {
+                    r.classList.remove('expandida');
+                    r.previousElementSibling.querySelector('i').classList.remove('fa-chevron-down');
+                    r.previousElementSibling.querySelector('i').classList.add('fa-chevron-right');
+                    r.previousElementSibling.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            if (resposta.classList.contains('expandida')) {
+                resposta.classList.remove('expandida');
+                icone.classList.remove('fa-chevron-down');
+                icone.classList.add('fa-chevron-right');
+                elemento.setAttribute('aria-expanded', 'false');
+            } else {
+                resposta.classList.add('expandida');
+                icone.classList.remove('fa-chevron-right');
+                icone.classList.add('fa-chevron-down');
+                elemento.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        // Suporte a áudio
+        document.getElementById('ajudaAudio').addEventListener('click', () => {
+            const texto = "No fórum Lumin, você pode fazer perguntas sobre tecnologia e receber respostas de outros usuários e voluntários. Para fazer uma pergunta, preencha o título e a descrição, e se preferir, você pode gravar um áudio. Sua pergunta será moderada e respondida em até 24 horas.";
+            
+            if ('speechSynthesis' in window) {
+                const voz = new SpeechSynthesisUtterance(texto);
+                voz.lang = 'pt-BR';
+                voz.rate = 0.9;
+                window.speechSynthesis.speak(voz);
+            } else {
+                alert(texto);
+            }
+        });
+
+        // Simular gravação de áudio
+        document.getElementById('gravarAudio').addEventListener('click', () => {
+            const botao = document.getElementById('gravarAudio');
+            botao.innerHTML = '<i class="fas fa-circle"></i> Gravando...';
+            botao.style.background = 'rgba(220, 53, 69, 0.1)';
+            botao.style.color = '#dc3545';
+            
+            setTimeout(() => {
+                botao.innerHTML = '<i class="fas fa-microphone"></i> Gravar Pergunta por Áudio';
+                botao.style.background = 'rgba(58, 95, 141, 0.08)';
+                botao.style.color = 'var(--cor-primaria)';
+                alert("Gravação concluída! Sua pergunta por áudio foi enviada para análise.");
+            }, 3000);
+        });
+        
+        // Voltar ao topo
+        function voltarAoTopo() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

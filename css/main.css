@@ -1,0 +1,138 @@
+/* ===== BASE + ACESSIBILIDADE (Diferencial "Acessibilidade Total") ===== */
+:root {
+    --azul-principal: #2A5C82;
+    --laranja-contraste: #FF8C00;
+    --preto-acessivel: #1A1A1A;
+    --branco: #FFF;
+    --fonte-base: 62.5%; /* 1rem = 10px para controle responsivo */
+}
+
+html {
+    font-size: var(--fonte-base);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.8;
+    color: var(--preto-acessivel);
+    background: #F8F9FA url('textura-suave.png') repeat;
+}
+
+/* ===== MODOS DE ACESSIBILIDADE (Requisito do arquivo) ===== */
+.high-contrast {
+    background: #000 !important;
+    color: #FFF !important;
+    
+    .card, button, input {
+        border: 2px solid #FFD700 !important;
+    }
+}
+
+.font-grande {
+    font-size: 2rem !important;
+    line-height: 2.4rem;
+}
+
+/* ===== ELEMENTOS INTERATIVOS (Simplicidade para iniciantes) ===== */
+button, .botao-icone {
+    padding: 1.5rem 3rem;
+    background: var(--azul-principal);
+    color: var(--branco) !important;
+    border-radius: 8px;
+    transition: transform 0.2s ease, opacity 0.3s;
+    cursor: pointer;
+    
+    &:active {
+        transform: scale(0.95); /* Feedback tátil (MVP) */
+    }
+    
+    &[aria-describedby] {
+        position: relative;
+        &::after {
+            content: "(" attr(aria-describedby) ")";
+            font-size: 0.8em;
+            margin-left: 1rem;
+        }
+    }
+}
+:root {
+  --cor-primaria: #2A5C82; /* Azul acessível */
+  --cor-texto: #333333;
+  --fundo: #F5F5F5;
+}
+body {
+  background: var(--fundo);
+  color: var(--cor-texto);
+  font-size: 18px; /* Fonte maior */
+}
+.botao-primario {
+  padding: 20px 30px;
+  font-size: 20px;
+}
+.icone-grande {
+  width: 48px;
+  height: 48px;
+}
+
+/* ===== BARRA DE PROGRESSO (Métrica "taxa de conclusão") ===== */
+.progress-container {
+    background: rgba(42, 92, 130, 0.1);
+    height: 2.5rem;
+    border-radius: 1.2rem;
+    margin: 2rem 0;
+}
+
+.progress-bar {
+    background: var(--azul-principal);
+    height: 100%;
+    border-radius: 1.2rem;
+    transition: width 0.5s ease;
+}
+
+/* ===== FÓRUM (Diferencial "comunidade de apoio") ===== */
+.post-forum {
+    background: var(--branco);
+    border-left: 0.4rem solid var(--azul-principal);
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 0.2rem 0.4rem rgba(0,0,0,0.05);
+    
+    &:focus-within {
+        outline: 0.3rem solid var(--laranja-contraste);
+    }
+}
+
+/* ===== COMPONENTES DE ÁUDIO (MVP: "instruções em áudio") ===== */
+.botao-audio {
+    width: 4rem;
+    height: 4rem;
+    background: var(--laranja-contraste) url('icone-audio.svg') no-repeat center;
+    
+    &::after {
+        content: "Clique para ouvir instruções";
+        position: absolute;
+        left: 120%;
+        width: 20rem;
+    }
+}
+
+/* ===== MOBILE (Público com dispositivos simples) ===== */
+@media (max-width: 768px) {
+    :root { --fonte-base: 55%; }
+    
+    button, .botao-icone {
+        min-width: 80%;
+        padding: 2rem;
+    }
+    
+    .post-forum {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* ===== FOCO ACESSÍVEL (Diferencial "leitor de tela") ===== */
+*:focus {
+    outline: 0.3rem solid var(--laranja-contraste);
+    outline-offset: 0.4rem;
+}

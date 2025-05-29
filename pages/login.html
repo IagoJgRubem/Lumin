@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Faça login na Lumin - Plataforma de inclusão digital com cursos básicos de tecnologia">
+    <title>Login - Lumin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap">
+    <style>
+        :root {
+            --cor-primaria: #4361ee;
+            --cor-secundaria: #3a0ca3;
+            --cor-destaque: #4cc9f0;
+            --cor-texto: #333333;
+            --cor-texto-claro: #6c757d;
+            --cor-fundo: #f8f9fa;
+            --cor-borda: #e9ecef;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: var(--cor-primaria);
+            --cor-botao-hover: #3a56d4;
+            --cor-header: rgba(255, 255, 255, 0.95);
+            --cor-foco: rgba(76, 201, 240, 0.5);
+            --sombra: 0 4px 20px rgba(0,0,0,0.08);
+            --sombra-foco: 0 0 0 4px var(--cor-foco);
+            --borda-arredondada: 50px;
+            --transicao: all 0.3s ease;
+            --cor-sucesso: #4CAF50;
+            --cor-erro: #f44336;
+        }
+        
+        .tema-escuro {
+            --cor-texto: #f1f3f5;
+            --cor-texto-claro: #adb5bd;
+            --cor-fundo: #121212;
+            --cor-borda: #343a40;
+            --cor-botao-fundo: #3a56d4;
+            --cor-botao-hover: #2d45b0;
+            --cor-header: rgba(24, 24, 24, 0.95);
+            --sombra: 0 4px 20px rgba(0,0,0,0.3);
+            --cor-destaque: #3a86ff; /* Nova cor para alto contraste no tema escuro */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            transition: var(--transicao);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+        
+        .sr-only, .sr-only-focusable:not(:focus) {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Header moderno com botões padronizados */
+        #header {
+            background-color: var(--cor-header);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--sombra);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transicao);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--cor-primaria);
+        }
+        
+        .logo-text span {
+            color: var(--cor-destaque);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--cor-primaria);
+            transition: var(--transicao);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Botões padronizados */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--cor-botao-fundo);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.75rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .button:hover {
+            background-color: var(--cor-botao-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .button:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .button:active {
+            transform: translateY(0);
+        }
+        
+        .button-outline {
+            background: transparent;
+            border: 2px solid var(--cor-primaria);
+            color: var(--cor-primaria);
+        }
+        
+        .button-outline:hover {
+            background-color: var(--cor-primaria);
+            color: white;
+        }
+        
+        /* Botão de tema com estilo consistente */
+        .botao-tema {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color: var(--cor-texto);
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--borda-arredondada);
+            padding: 0.75rem 1.5rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 0.5rem;
+            height: 44px;
+        }
+        
+        .botao-tema:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            border-color: var(--cor-primaria);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        }
+        
+        .botao-tema:focus-visible {
+            outline: none;
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .tema-icone {
+            font-size: 1.2rem;
+        }
+        
+        .menu-mobile {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        /* MAIN CONTENT - Área de Login */
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 2rem;
+        }
+        
+        .login-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background-color: var(--cor-header);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            min-height: 600px;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .login-illustration {
+            flex: 1;
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-illustration::before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-illustration::after {
+            content: "";
+            position: absolute;
+            bottom: -80px;
+            left: -80px;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .login-illustration img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 2rem;
+        }
+        
+        .login-illustration h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .login-illustration p {
+            font-size: 1.2rem;
+            max-width: 500px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .login-form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .login-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .login-header p {
+            color: var(--cor-texto-claro);
+            font-size: 1.1rem;
+        }
+        
+        .login-form {
+            width: 100%;
+            max-width: 450px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.75rem;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--cor-texto);
+            font-size: 0.95rem;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.9rem 1rem 0.9rem 3.2rem;
+            border: 2px solid var(--cor-borda);
+            border-radius: var(--borda-arredondada);
+            font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: var(--transicao);
+            background-color: transparent;
+            color: var(--cor-texto);
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--cor-primaria);
+            box-shadow: var(--sombra-foco);
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cor-texto-claro);
+            font-size: 1.1rem;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--cor-texto-claro);
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .remember-me input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--cor-primaria);
+        }
+        
+        .forgot-password {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            transition: var(--transicao);
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-login {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .social-login p {
+            margin-bottom: 1rem;
+            color: var(--cor-texto-claro);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .social-login p::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: var(--cor-borda);
+            z-index: -1;
+        }
+        
+        .social-login span {
+            background-color: var(--cor-header);
+            padding: 0 1rem;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--cor-borda);
+            background-color: transparent;
+            color: var(--cor-texto);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+        
+        .social-button:hover {
+            background-color: rgba(67, 97, 238, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .social-button.google:hover {
+            background-color: #f2f8ff;
+            border-color: #4285F4;
+        }
+        
+        .social-button.facebook:hover {
+            background-color: #f5f7ff;
+            border-color: #4267B2;
+        }
+        
+        .tema-escuro .social-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .signup-link {
+            text-align: center;
+            color: var(--cor-texto-claro);
+            font-size: 0.95rem;
+        }
+        
+        .signup-link a {
+            color: var(--cor-primaria);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transicao);
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cor-header);
+            padding: 2rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            border-top: 1px solid var(--cor-borda);
+        }
+        
+        .container-footer {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-texto);
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            transition: var(--transicao);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--cor-primaria);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            font-size: 0.9rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--cor-borda);
+            color: var(--cor-texto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicao);
+        }
+        
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--cor-borda);
+            color: var(--cor-texto-claro);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 600px;
+            }
+            
+            .login-illustration {
+                padding: 2rem;
+            }
+            
+            .login-illustration h2 {
+                font-size: 2rem;
+            }
+            
+            .login-illustration p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #header {
+                padding: 1rem;
+            }
+            
+            .menu-desktop {
+                display: none;
+            }
+            
+            .menu-mobile {
+                display: block;
+            }
+            
+            .login-container {
+                margin-top: 1rem;
+            }
+            
+            .login-illustration {
+                padding: 1.5rem;
+            }
+            
+            .login-form-container {
+                padding: 2rem;
+            }
+            
+            .login-header h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                border-radius: 15px;
+            }
+            
+            .login-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .social-buttons {
+                gap: 0.5rem;
+            }
+            
+            .social-button {
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        /* Menu mobile */
+        .mobile-menu-container {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: var(--cor-header);
+            z-index: 2000;
+            transition: var(--transicao);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mobile-menu-container.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--cor-texto);
+            cursor: pointer;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transicao);
+            display: block;
+            padding: 0.5rem 0;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transicao);
+        }
+        
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Animações */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        /* Estilo para erros */
+        .error-message {
+            color: var(--cor-erro);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .form-group.error .form-input {
+            border-color: var(--cor-erro);
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only sr-only-focusable">
+        Pular para conteúdo principal
+    </a>
+
+    <header id="header" role="banner">
+        <a href="index.html" class="logo" aria-label="Página inicial da Lumin">
+            <div class="logo-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="logo-text">Lumi<span>n</span></div>
+        </a>
+        
+        <nav class="menu-desktop" role="navigation" aria-label="Menu principal">
+            <ul>
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema()"
+                        id="botao-tema"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="index.html" class="button button-outline">Voltar para Home</a></li>
+            </ul>
+        </nav>
+        
+        <button class="menu-mobile" aria-label="Abrir menu" onclick="abrirMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Menu Mobile -->
+    <div class="overlay" id="overlay" onclick="fecharMenu()"></div>
+    <div class="mobile-menu-container" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="logo-text">Lumi<span>n</span></div>
+            </div>
+            <button class="close-menu" aria-label="Fechar menu" onclick="fecharMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <nav>
+            <ul class="mobile-nav">
+                <li>
+                    <button 
+                        class="botao-tema" 
+                        style="width: 100%"
+                        aria-label="Alternar tema entre claro e escuro"
+                        onclick="alternarTema(); fecharMenu()"
+                    >
+                        <span class="tema-icone">🌞</span>
+                        <span class="tema-texto">Tema Claro</span>
+                    </button>
+                </li>
+                <li><a href="index.html" class="button" style="text-align: center;">Voltar para Home</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main id="main-content" role="main">
+        <div class="login-container">
+            <div class="login-illustration">
+                <svg viewBox="0 0 400 400" width="300" height="300">
+                    <circle cx="200" cy="200" r="180" fill="none" stroke="white" stroke-width="8" stroke-dasharray="10 5" />
+                    <circle cx="200" cy="150" r="50" fill="white" />
+                    <path d="M 150 200 Q 200 280 250 200" stroke="white" stroke-width="8" fill="none" />
+                    <g transform="translate(200 280)">
+                        <circle cx="-50" cy="0" r="20" fill="white" />
+                        <circle cx="50" cy="0" r="20" fill="white" />
+                        <line x1="-50" y1="0" x2="-50" y2="40" stroke="white" stroke-width="8" />
+                        <line x1="50" y1="0" x2="50" y2="40" stroke="white" stroke-width="8" />
+                    </g>
+                </svg>
+                <h2>Transforme sua relação com a tecnologia</h2>
+                <p>Junte-se a mais de 10 mil alunos que estão dominando habilidades digitais essenciais</p>
+            </div>
+            
+            <div class="login-form-container">
+                <div class="login-header">
+                    <h1 class="floating">Bem-vindo de volta</h1>
+                    <p>Entre para continuar sua jornada de aprendizado</p>
+                </div>
+                
+                <form class="login-form" id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">E-mail</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="form-input" 
+                                placeholder="seu@email.com"
+                                required
+                                aria-required="true"
+                            >
+                        </div>
+                        <div class="error-message" id="email-error">Por favor, insira um e-mail válido</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-input" 
+                                placeholder="Digite sua senha"
+                                required
+                                aria-required="true"
+                            >
+                            <button type="button" class="password-toggle" aria-label="Mostrar senha">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="password-error">A senha deve ter pelo menos 6 caracteres</div>
+                    </div>
+                    
+                    <div class="remember-forgot">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Lembrar-me</label>
+                        </div>
+                        <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                    </div>
+                    
+                    <button type="submit" class="button login-button">
+                        <i class="fas fa-sign-in-alt"></i> Entrar
+                    </button>
+                    
+                    <div class="social-login">
+                        <p><span>Ou entre com</span></p>
+                        <div class="social-buttons">
+                            <button type="button" class="social-button google" aria-label="Entrar com Google">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="social-button facebook" aria-label="Entrar com Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <p class="signup-link">
+                        Não tem uma conta? <a href="#">Cadastre-se agora</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="container-footer">
+            <div class="footer-col">
+                <h4>Sobre a Lumin</h4>
+                <p style="color: var(--cor-texto-claro); margin-bottom: 1.5rem;">
+                    Plataforma de inclusão digital com cursos básicos de tecnologia para todos. Aprenda no seu ritmo e transforme sua relação com a tecnologia.
+                </p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Links Rápidos</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Página Inicial</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Recursos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Cursos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Depoimentos</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Sobre Nós</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Cursos Populares</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Navegação na Internet</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Uso de E-mail</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Redes Sociais</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Segurança Online</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Ferramentas de Escritório</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p style="color: var(--cor-texto-claro); margin-bottom: 1.5rem;">
+                    Inscreva-se para receber novidades e atualizações de cursos.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" required>
+                    <button type="submit" class="button" style="padding: 0.75rem 1.5rem;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Lumin - Plataforma de Inclusão Digital. Todos os direitos reservados.</p>
+            <div style="margin-top: 1rem;">
+                <a href="politica-privacidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Política de Privacidade</a> | 
+                <a href="termos-uso.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Termos de Uso</a> | 
+                <a href="acessibilidade.html" style="color: var(--cor-texto-claro); margin: 0 0.5rem;">Acessibilidade</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funções para alternar tema
+        function alternarTema() {
+            const body = document.body;
+            const temaAtual = body.classList.toggle('tema-escuro');
+            const tema = temaAtual ? 'Escuro' : 'Claro';
+            
+            localStorage.setItem('tema', tema);
+            atualizarBotaoTema(tema);
+            
+            // Anunciar mudança de tema para leitores de tela
+            document.getElementById('a11y-status').textContent = `Tema alterado para ${tema}`;
+            setTimeout(() => {
+                document.getElementById('a11y-status').textContent = '';
+            }, 2000);
+        }
+        
+        function atualizarBotaoTema(tema) {
+            const botoesTema = document.querySelectorAll('.botao-tema');
+            botoesTema.forEach(botao => {
+                const icone = botao.querySelector('.tema-icone');
+                const texto = botao.querySelector('.tema-texto');
+                
+                if (tema === 'Escuro') {
+                    icone.textContent = '🌙';
+                    texto.textContent = 'Tema Escuro';
+                    botao.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+                } else {
+                    icone.textContent = '🌞';
+                    texto.textContent = 'Tema Claro';
+                    botao.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+                }
+            });
+        }
+        
+        // Menu mobile
+        function abrirMenu() {
+            document.getElementById('mobile-menu').classList.add('active');
+            document.getElementById('overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function fecharMenu() {
+            document.getElementById('mobile-menu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        // Funcionalidade do formulário de login
+        document.addEventListener('DOMContentLoaded', () => {
+            // Inicializa o tema
+            const temaSalvo = localStorage.getItem('tema');
+            if (temaSalvo === 'Escuro') {
+                document.body.classList.add('tema-escuro');
+                atualizarBotaoTema('Escuro');
+            } else {
+                atualizarBotaoTema('Claro');
+            }
+            
+            // Alternar visibilidade da senha
+            const passwordToggle = document.querySelector('.password-toggle');
+            const passwordInput = document.getElementById('password');
+            
+            passwordToggle.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                passwordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Validação do formulário
+            const loginForm = document.getElementById('loginForm');
+            
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email');
+                const password = document.getElementById('password');
+                let valid = true;
+                
+                // Validação de e-mail
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value)) {
+                    email.parentElement.parentElement.classList.add('error');
+                    valid = false;
+                } else {
+                    email.parentElement.parentElement.classList.remove('error');
+                }
+                
+                // Validação de senha
+                if (password.value.length < 6) {
+                    password.parentElement.parentElement.classList.add('error');
+                    valid = false;
+                } else {
+                    password.parentElement.parentElement.classList.remove('error');
+                }
+                
+                if (valid) {
+                    // Simulação de login bem-sucedido
+                    alert('Login realizado com sucesso! Redirecionando...');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                }
+            });
+            
+            // Remover erros ao digitar
+            const inputs = loginForm.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('input', () => {
+                    input.parentElement.parentElement.classList.remove('error');
+                });
+            });
+        });
+    </script>
+    <div aria-live="polite" class="sr-only" id="a11y-status"></div>
+</body>
+</html>

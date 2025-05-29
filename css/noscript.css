@@ -1,0 +1,152 @@
+/* ===== ESTILOS GERAIS + ACESSIBILIDADE ===== */
+:root {
+    --azul-principal: #2A5C82;
+    --laranja-contraste: #FF8C00; /* Cor ajustada para melhor contraste */
+    --preto: #1a3a4e;
+    --branco: #FFF;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    color: var(--azul-principal);
+    background-color: #f5f9fc;
+    background-image: linear-gradient(
+        to bottom right,
+        rgba(42, 92, 130, 0.1),
+        rgba(255, 255, 255, 0.9)
+    );
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+h1, h2, h3 {
+    color: var(--preto);
+    font-weight: 600;
+}
+
+/* ===== LINKS ACESSÍVEIS ===== */
+a {
+    color: var(--azul-principal);
+    border-bottom: 2px solid rgba(42, 92, 130, 0.3);
+    text-decoration: none;
+    transition: border-color 0.3s ease;
+}
+
+a:hover {
+    border-bottom-color: var(--laranja-contraste);
+}
+
+a:focus {
+    outline: 2px solid var(--laranja-contraste);
+    outline-offset: 3px;
+    border-bottom-color: transparent;
+}
+
+/* ===== BOTÕES INTERATIVOS ===== */
+.button {
+    background-color: var(--azul-principal);
+    color: var(--branco) !important;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-tap-highlight-color: rgba(255, 140, 0, 0.3);
+}
+
+.button:hover {
+    opacity: 0.9;
+}
+
+.button:active {
+    transform: scale(0.97);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.button:focus {
+    outline: 2px solid var(--laranja-contraste);
+    outline-offset: 4px;
+}
+
+/* ===== COMPONENTES ESPECÍFICOS ===== */
+.post-forum {
+    background: var(--branco);
+    border-left: 4px solid var(--azul-principal);
+    margin: 1rem 0;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.progress-bar {
+    height: 25px;
+    background: rgba(42, 92, 130, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--azul-principal);
+    transition: width 0.5s ease;
+}
+
+/* ===== MODOS DE ACESSIBILIDADE ===== */
+.high-contrast {
+    background: #000 !important;
+    color: #FFF !important;
+    
+    .button {
+        background: #FFF !important;
+        color: #000 !important;
+        border: 2px solid #FFF;
+    }
+    
+    .post-forum {
+        border-color: #FFF;
+        background: #222;
+    }
+}
+
+.font-grande {
+    font-size: 1.5rem !important;
+    line-height: 1.8;
+}
+
+/* ===== MEDIA QUERIES PARA MOBILE ===== */
+@media screen and (max-width: 736px) {
+    body {
+        background-size: auto;
+        padding: 1rem;
+    }
+
+    .button {
+        width: 100%;
+        min-width: 120px;
+        padding: 1.5rem;
+    }
+
+    a {
+        padding: 8px 0;
+    }
+
+    input, textarea {
+        font-size: 16px !important; /* Melhora o zoom em mobile */
+    }
+}
+
+/* ===== FORMULÁRIOS ACESSÍVEIS ===== */
+input, textarea {
+    border: 2px solid var(--azul-principal) !important;
+    padding: 12px !important;
+    border-radius: 4px;
+    min-width: 120px;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: var(--laranja-contraste) !important;
+    outline: 2px solid var(--laranja-contraste);
+}

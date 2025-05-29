@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Progresso - Lumin</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cor-primaria: #3a5f8d;
+            --cor-secundaria: #0d4a6e;
+            --cor-terciaria: #4d7bb6;
+            --cor-texto: #333333;
+            --cor-texto-claro: #5a6d86;
+            --cor-fundo: #f8fafc;
+            --cor-borda: #e2e8f0;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: var(--cor-primaria);
+            --cor-botao-hover: var(--cor-secundaria);
+            --cor-header: #ffffff;
+            --cor-foco: #ffbf00;
+            --sombra: 0 4px 12px rgba(0,0,0,0.05);
+            --sombra-card: 0 6px 20px rgba(0, 0, 0, 0.05);
+            --cor-sucesso: #28a745;
+            --cor-andamento: #ffc107;
+            --cor-em-espera: #6c757d;
+            --cor-favorito: #e83e8c;
+            --cor-conquista: #20c997;
+            --gradiente-primario: linear-gradient(135deg, var(--cor-primaria), var(--cor-secundaria));
+            --transicao: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --raio-borda: 14px;
+            --espacamento: 1.5rem;
+        }
+        
+        .tema-escuro {
+            --cor-texto: #e0e0e0;
+            --cor-texto-claro: #a0aec0;
+            --cor-fundo: #121826;
+            --cor-borda: #2d3748;
+            --cor-botao-texto: #ffffff;
+            --cor-botao-fundo: #2c3e50;
+            --cor-botao-hover: #1a2a38;
+            --cor-header: #1a202c;
+            --sombra: 0 4px 12px rgba(0,0,0,0.15);
+            --sombra-card: 0 6px 20px rgba(0, 0, 0, 0.15);
+            --cor-sucesso: #20c997;
+            --cor-andamento: #fd7e14;
+            --cor-em-espera: #adb5bd;
+            --cor-favorito: #e685b5;
+            --cor-conquista: #0dcaf0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--cor-primaria);
+            font-weight: 600;
+        }
+        
+        p {
+            color: var(--cor-texto-claro);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* Header */
+        #header {
+            background-color: var(--cor-header);
+            box-shadow: var(--sombra);
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transicao);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 48px;
+            width: 48px;
+            border-radius: 50%;
+            background: var(--gradiente-primario);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .logo-texto {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            background: var(--gradiente-primario);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.8rem;
+        }
+        
+        .button, .botao-tema {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--gradiente-primario);
+            color: var(--cor-botao-texto);
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1.4rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            gap: 8px;
+        }
+        
+        .button:hover, .botao-tema:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            opacity: 0.92;
+        }
+        
+        .button:focus-visible, 
+        .botao-tema:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--cor-foco);
+        }
+        
+        .botao-tema {
+            gap: 0.5rem;
+        }
+        
+        .tema-icone {
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+        
+        .cabecalho {
+            text-align: center;
+            margin-bottom: 3.5rem;
+            padding: 0 1rem;
+        }
+        
+        .cabecalho h1 {
+            font-size: 2.6rem;
+            margin-bottom: 1.2rem;
+            background: var(--gradiente-primario);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+        
+        .cabecalho p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        
+        /* Estatísticas */
+        .estatisticas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 3.5rem;
+        }
+        
+        .estatistica-card {
+            background: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transicao);
+            border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .estatistica-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .estatistica-valor {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+            color: var(--cor-primaria);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .estatistica-titulo {
+            font-size: 1.1rem;
+            color: var(--cor-texto-claro);
+            margin-bottom: 0.8rem;
+        }
+        
+        .estatistica-desc {
+            font-size: 1rem;
+            color: var(--cor-texto);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+        }
+        
+        /* Progresso dos Cursos */
+        .grid-progresso {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .cartao-progresso {
+            background-color: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 2rem;
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cartao-progresso::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+        }
+        
+        .cursos-iniciados::before {
+            background: var(--gradiente-primario);
+        }
+        
+        .cursos-concluidos::before {
+            background: linear-gradient(135deg, var(--cor-sucesso), #1d9c4a);
+        }
+        
+        .cursos-andamento::before {
+            background: linear-gradient(135deg, var(--cor-andamento), #e6a323);
+        }
+        
+        .cursos-espera::before {
+            background: linear-gradient(135deg, var(--cor-em-espera), #5a6268);
+        }
+        
+        .cartao-progresso:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .cartao-cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+            padding-top: 0.5rem;
+        }
+        
+        .cartao-icone {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .cursos-iniciados .cartao-icone {
+            background: rgba(58, 95, 141, 0.1);
+            color: var(--cor-primaria);
+        }
+        
+        .cursos-concluidos .cartao-icone {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--cor-sucesso);
+        }
+        
+        .cursos-andamento .cartao-icone {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--cor-andamento);
+        }
+        
+        .cursos-espera .cartao-icone {
+            background: rgba(108, 117, 125, 0.1);
+            color: var(--cor-em-espera);
+        }
+        
+        .cartao-titulo {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--cor-texto);
+        }
+        
+        .barra-progresso {
+            background: rgba(0,0,0,0.05);
+            border-radius: 10px;
+            height: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .barra-progresso-preenchimento {
+            height: 100%;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .cursos-iniciados .barra-progresso-preenchimento {
+            background: var(--gradiente-primario);
+        }
+        
+        .cursos-concluidos .barra-progresso-preenchimento {
+            background: linear-gradient(135deg, var(--cor-sucesso), #1d9c4a);
+        }
+        
+        .cursos-andamento .barra-progresso-preenchimento {
+            background: linear-gradient(135deg, var(--cor-andamento), #e6a323);
+        }
+        
+        .cursos-espera .barra-progresso-preenchimento {
+            background: linear-gradient(135deg, var(--cor-em-espera), #5a6268);
+        }
+        
+        .lista-cursos {
+            list-style: none;
+            padding: 0;
+            margin-top: auto;
+        }
+        
+        .lista-cursos li {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--cor-borda);
+            transition: var(--transicao);
+        }
+        
+        .lista-cursos li:hover {
+            background: rgba(58, 95, 141, 0.03);
+            border-radius: 8px;
+        }
+        
+        .lista-cursos li:last-child {
+            border-bottom: none;
+        }
+        
+        .curso-icone {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(58, 95, 141, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+            color: var(--cor-primaria);
+        }
+        
+        .curso-info {
+            flex-grow: 1;
+        }
+        
+        .curso-nome {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--cor-texto);
+        }
+        
+        .curso-stats {
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .badge-progresso {
+            background: rgba(58, 95, 141, 0.1);
+            color: var(--cor-primaria);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        
+        .cursos-concluidos .badge-progresso {
+            background: rgba(40, 167, 69, 0.1);
+            color: var(--cor-sucesso);
+        }
+        
+        .cursos-andamento .badge-progresso {
+            background: rgba(255, 193, 7, 0.1);
+            color: var(--cor-andamento);
+        }
+        
+        .cursos-espera .badge-progresso {
+            background: rgba(108, 117, 125, 0.1);
+            color: var(--cor-em-espera);
+        }
+        
+        /* Conquistas */
+        .conquistas {
+            background-color: var(--cor-header);
+            border-radius: var(--raio-borda);
+            box-shadow: var(--sombra-card);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--cor-borda);
+        }
+        
+        .conquistas-titulo {
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            color: var(--cor-primaria);
+        }
+        
+        .conquistas-titulo i {
+            color: var(--cor-conquista);
+            background: rgba(32, 201, 151, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .grid-conquistas {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.8rem;
+        }
+        
+        .conquista-card {
+            background: rgba(58, 95, 141, 0.05);
+            border-radius: var(--raio-borda);
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: var(--transicao);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conquista-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, var(--cor-conquista), #0dcaf0);
+        }
+        
+        .conquista-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .conquista-icone {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            color: var(--cor-conquista);
+            transition: var(--transicao);
+        }
+        
+        .conquista-card:hover .conquista-icone {
+            transform: scale(1.1);
+        }
+        
+        .conquista-nome {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--cor-primaria);
+            font-size: 1.2rem;
+        }
+        
+        .conquista-desc {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: var(--cor-texto-claro);
+            line-height: 1.5;
+        }
+        
+        .conquista-data {
+            font-size: 0.85rem;
+            color: var(--cor-texto-claro);
+            margin-top: auto;
+            font-style: italic;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--cor-header);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--cor-borda);
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--espacamento);
+        }
+        
+        .footer-conteudo {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-titulo {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--cor-primaria);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-titulo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--gradiente-primario);
+            border-radius: 3px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        footer a {
+            color: var(--cor-texto-claro);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transicao);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        footer a:hover {
+            color: var(--cor-primaria);
+        }
+        
+        .footer-info {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--cor-texto-claro);
+        }
+        
+        .footer-info-item i {
+            color: var(--cor-primaria);
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            margin: 1.5rem 0;
+            text-align: center;
+            font-size: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--cor-borda);
+            width: 100%;
+            color: var(--cor-texto-claro);
+        }
+        
+        .info-acessibilidade {
+            font-size: 0.95rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 0 1rem;
+            color: var(--cor-texto-claro);
+            line-height: 1.7;
+        }
+        
+        /* Botão Voltar ao Topo */
+        .voltar-topo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradiente-primario);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transicao);
+            box-shadow: var(--sombra);
+            z-index: 999;
+            border: none;
+        }
+        
+        .voltar-topo.visivel {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .voltar-topo:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .grid-progresso {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .grid-conquistas {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .cabecalho h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cabecalho p {
+                font-size: 1.1rem;
+            }
+            
+            .cartao-cabecalho {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .cartao-icone {
+                margin-bottom: 0.5rem;
+            }
+            
+            .conquistas {
+                padding: 1.8rem 1.2rem;
+            }
+            
+            .footer-conteudo {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .botao-tema {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .cabecalho h1 {
+                font-size: 1.9rem;
+                gap: 1rem;
+            }
+            
+            .cabecalho p {
+                font-size: 1rem;
+            }
+            
+            .estatisticas {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-progresso {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .voltar-topo {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        /* Animação de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animar {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        
+        .atraso-1 {
+            animation-delay: 0.1s;
+        }
+        
+        .atraso-2 {
+            animation-delay: 0.2s;
+        }
+        
+        .atraso-3 {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="sr-only">
+        Pular para conteúdo principal
+    </a>
+
+    <header id="header" role="banner">
+        <div class="header-container">
+            <a href="index.html" class="logo" aria-label="Página inicial da Lumin">
+                <div class="logo-img">L</div>
+                <span class="logo-texto">Lumin</span>
+            </a>
+            <nav role="navigation" aria-label="Menu principal">
+                <ul>
+                    <li><a href="cursos.html" class="button"><i class="fas fa-book"></i> Cursos</a></li>
+                    <li><a href="elements.html" class="button"><i class="fas fa-comments"></i> Fórum</a></li>
+                    <li>
+                        <button 
+                            class="button botao-tema" 
+                            aria-label="Alternar tema entre claro e escuro"
+                            onclick="alternarTema()"
+                            id="botao-tema"
+                        >
+                            <span class="tema-icone">🌞</span>
+                            <span class="tema-texto">Tema Claro</span>
+                        </button>
+                    </li>
+                    <li><a href="cursos.html" class="button"><i class="fas fa-graduation-cap"></i> Ver Todos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content" role="main">
+        <div class="container">
+            <div class="cabecalho animar">
+                <h1><i class="fas fa-chart-line"></i> Meu Progresso</h1>
+                <p>Acompanhe seu desenvolvimento nos cursos, visualize suas conquistas e veja como está evoluindo na jornada digital.</p>
+            </div>
+
+            <div class="estatisticas">
+                <div class="estatistica-card animar atraso-1">
+                    <div class="estatistica-titulo">Horas de Aprendizado</div>
+                    <div class="estatistica-valor">24</div>
+                    <div class="estatistica-desc">
+                        <i class="fas fa-clock"></i>
+                        <span>Total de horas dedicadas</span>
+                    </div>
+                </div>
+                
+                <div class="estatistica-card animar atraso-2">
+                    <div class="estatistica-titulo">Cursos Iniciados</div>
+                    <div class="estatistica-valor">5</div>
+                    <div class="estatistica-desc">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Cursos em andamento</span>
+                    </div>
+                </div>
+                
+                <div class="estatistica-card animar atraso-3">
+                    <div class="estatistica-titulo">Cursos Concluídos</div>
+                    <div class="estatistica-valor">3</div>
+                    <div class="estatistica-desc">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Cursos finalizados</span>
+                    </div>
+                </div>
+                
+                <div class="estatistica-card animar">
+                    <div class="estatistica-titulo">Conquistas</div>
+                    <div class="estatistica-valor">8</div>
+                    <div class="estatistica-desc">
+                        <i class="fas fa-trophy"></i>
+                        <span>Badges conquistados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-progresso">
+                <!-- Cursos Iniciados -->
+                <div class="cartao-progresso cursos-iniciados animar atraso-1" role="region" aria-labelledby="cursos-iniciados-titulo">
+                    <div class="cartao-cabecalho">
+                        <div class="cartao-icone">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h2 class="cartao-titulo" id="cursos-iniciados-titulo">Cursos Iniciados</h2>
+                    </div>
+                    <div class="barra-progresso" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+                        <div class="barra-progresso-preenchimento" style="width: 40%">40%</div>
+                    </div>
+                    <ul class="lista-cursos" role="list">
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Curso de E-mail</div>
+                                <div class="curso-stats">
+                                    <span>4 de 10 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-spinner"></i> Em progresso
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Navegadores Web</div>
+                                <div class="curso-stats">
+                                    <span>2 de 8 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-play"></i> Iniciado
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cursos Concluídos -->
+                <div class="cartao-progresso cursos-concluidos animar atraso-2" role="region" aria-labelledby="cursos-concluidos-titulo">
+                    <div class="cartao-cabecalho">
+                        <div class="cartao-icone">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2 class="cartao-titulo" id="cursos-concluidos-titulo">Cursos Concluídos</h2>
+                    </div>
+                    <div class="barra-progresso" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                        <div class="barra-progresso-preenchimento" style="width: 100%">100%</div>
+                    </div>
+                    <ul class="lista-cursos" role="list">
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Introdução à Tecnologia</div>
+                                <div class="curso-stats">
+                                    <span>10 de 10 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-check"></i> Concluído
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Pesquisa na Internet</div>
+                                <div class="curso-stats">
+                                    <span>6 de 6 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-check"></i> Concluído
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cursos em Andamento -->
+                <div class="cartao-progresso cursos-andamento animar atraso-3" role="region" aria-labelledby="cursos-andamento-titulo">
+                    <div class="cartao-cabecalho">
+                        <div class="cartao-icone">
+                            <i class="fas fa-spinner"></i>
+                        </div>
+                        <h2 class="cartao-titulo" id="cursos-andamento-titulo">Cursos em Andamento</h2>
+                    </div>
+                    <div class="barra-progresso" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                        <div class="barra-progresso-preenchimento" style="width: 60%">60%</div>
+                    </div>
+                    <ul class="lista-cursos" role="list">
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Curso de Computador</div>
+                                <div class="curso-stats">
+                                    <span>6 de 10 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-fire"></i> Ativo
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Cursos em Espera -->
+                <div class="cartao-progresso cursos-espera animar" role="region" aria-labelledby="cursos-espera-titulo">
+                    <div class="cartao-cabecalho">
+                        <div class="cartao-icone">
+                            <i class="fas fa-pause-circle"></i>
+                        </div>
+                        <h2 class="cartao-titulo" id="cursos-espera-titulo">Cursos em Espera</h2>
+                    </div>
+                    <div class="barra-progresso" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="barra-progresso-preenchimento" style="width: 0%">0%</div>
+                    </div>
+                    <ul class="lista-cursos" role="list">
+                        <li role="listitem">
+                            <div class="curso-icone">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="curso-info">
+                                <div class="curso-nome">Curso de Celular</div>
+                                <div class="curso-stats">
+                                    <span>0 de 5 lições</span>
+                                    <span class="badge-progresso">
+                                        <i class="fas fa-pause"></i> Pausado
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Conquistas -->
+            <div class="conquistas" role="region" aria-labelledby="conquistas-titulo">
+                <h2 class="conquistas-titulo" id="conquistas-titulo">
+                    <i class="fas fa-trophy"></i> Minhas Conquistas
+                </h2>
+                <div class="grid-conquistas">
+                    <div class="conquista-card animar atraso-1" role="listitem" aria-label="Iniciante Digital">
+                        <div class="conquista-icone">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h3 class="conquista-nome">Iniciante Digital</h3>
+                        <p class="conquista-desc">Completou seu primeiro curso com sucesso</p>
+                        <div class="conquista-data">Conquistado em: 15/05/2025</div>
+                    </div>
+                    
+                    <div class="conquista-card animar atraso-2" role="listitem" aria-label="Explorador de Navegadores">
+                        <div class="conquista-icone">
+                            <i class="fas fa-compass"></i>
+                        </div>
+                        <h3 class="conquista-nome">Explorador Web</h3>
+                        <p class="conquista-desc">Completou 5 lições sobre navegadores</p>
+                        <div class="conquista-data">Conquistado em: 22/05/2025</div>
+                    </div>
+                    
+                    <div class="conquista-card animar atraso-3" role="listitem" aria-label="Mestre do E-mail">
+                        <div class="conquista-icone">
+                            <i class="fas fa-mail-bulk"></i>
+                        </div>
+                        <h3 class="conquista-nome">Mestre do E-mail</h3>
+                        <p class="conquista-desc">Completou todas as lições sobre e-mail</p>
+                        <div class="conquista-data">Conquistado em: 28/05/2025</div>
+                    </div>
+                    
+                    <div class="conquista-card animar" role="listitem" aria-label="Curioso Tecnológico">
+                        <div class="conquista-icone">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="conquista-nome">Curioso Tecnológico</h3>
+                        <p class="conquista-desc">Iniciou 3 cursos diferentes em uma semana</p>
+                        <div class="conquista-data">Conquistado em: 10/06/2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-conteudo">
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Links Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Página Inicial</a></li>
+                        <li><a href="cursos.html"><i class="fas fa-book"></i> Cursos</a></li>
+                        <li><a href="forum.html"><i class="fas fa-comments"></i> Fórum</a></li>
+                        <li><a href="progresso.html"><i class="fas fa-chart-line"></i> Progresso</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Suporte</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                        <li><a href="contato.html"><i class="fas fa-envelope"></i> Contato</a></li>
+                        <li><a href="tutoriais.html"><i class="fas fa-video"></i> Tutoriais</a></li>
+                        <li><a href="comunidade.html"><i class="fas fa-users"></i> Comunidade</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-titulo">Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="politica-privacidade.html"><i class="fas fa-shield-alt"></i> Privacidade</a></li>
+                        <li><a href="termos-uso.html"><i class="fas fa-file-contract"></i> Termos de Uso</a></li>
+                        <li><a href="acessibilidade.html"><i class="fas fa-universal-access"></i> Acessibilidade</a></li>
+                        <li><a href="cookies.html"><i class="fas fa-cookie-bite"></i> Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-info">
+                <div class="footer-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contato@lumin.org.br</span>
+                </div>
+                <div class="footer-info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(11) 9999-9999</span>
+                </div>
+                <div class="footer-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>São Paulo, Brasil</span>
+                </div>
+            </div>
+            
+            <p class="copyright">&copy; 2025 Lumin - Inclusão Digital. Todos os direitos reservados.</p>
+            
+            <p class="info-acessibilidade">
+                Este site segue as diretrizes de acessibilidade WCAG 2.1. Se encontrar qualquer problema de acessibilidade, por favor
+                <a href="contato.html">entre em contato</a>.
+            </p>
+        </div>
+    </footer>
+    
+    <button class="voltar-topo" aria-label="Voltar ao topo da página" onclick="voltarAoTopo()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Alternar tema
+        function alternarTema() {
+            const body = document.body;
+            const botaoTema = document.getElementById('botao-tema');
+            const icone = botaoTema.querySelector('.tema-icone');
+            const texto = botaoTema.querySelector('.tema-texto');
+            
+            body.classList.toggle('tema-escuro');
+            
+            if (body.classList.contains('tema-escuro')) {
+                icone.textContent = '🌙';
+                texto.textContent = 'Tema Escuro';
+                botaoTema.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+                localStorage.setItem('tema', 'Escuro');
+            } else {
+                icone.textContent = '🌞';
+                texto.textContent = 'Tema Claro';
+                botaoTema.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+                localStorage.setItem('tema', 'Claro');
+            }
+        }
+
+        // Inicialização do tema
+        document.addEventListener('DOMContentLoaded', () => {
+            const temaSalvo = localStorage.getItem('tema');
+            const botaoTema = document.getElementById('botao-tema');
+            const icone = botaoTema.querySelector('.tema-icone');
+            const texto = botaoTema.querySelector('.tema-texto');
+            
+            if (temaSalvo === 'Escuro') {
+                document.body.classList.add('tema-escuro');
+                icone.textContent = '🌙';
+                texto.textContent = 'Tema Escuro';
+                botaoTema.setAttribute('aria-label', 'Tema escuro ativo. Clique para alternar para tema claro');
+            } else {
+                icone.textContent = '🌞';
+                texto.textContent = 'Tema Claro';
+                botaoTema.setAttribute('aria-label', 'Tema claro ativo. Clique para alternar para tema escuro');
+            }
+            
+            // Configurar botão voltar ao topo
+            window.addEventListener('scroll', () => {
+                const botaoTopo = document.querySelector('.voltar-topo');
+                if (window.scrollY > 500) {
+                    botaoTopo.classList.add('visivel');
+                } else {
+                    botaoTopo.classList.remove('visivel');
+                }
+            });
+            
+            // Animar barras de progresso
+            setTimeout(() => {
+                document.querySelectorAll('.barra-progresso-preenchimento').forEach(barra => {
+                    const width = barra.style.width;
+                    barra.style.width = '0';
+                    setTimeout(() => {
+                        barra.style.width = width;
+                    }, 300);
+                });
+            }, 500);
+        });
+
+        // Voltar ao topo
+        function voltarAoTopo() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
